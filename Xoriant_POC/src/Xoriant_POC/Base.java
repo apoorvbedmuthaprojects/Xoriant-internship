@@ -1,5 +1,9 @@
 package Xoriant_POC;
 import java.util.*;
+import java.io.*;
+interface lambda{
+	public void sayHello();
+}
 class Parent{
 	static String str="this element is inherited from parent";
 	private int a=7;
@@ -187,10 +191,49 @@ class Base extends Parent{
 			System.out.println(i.next());
 		}
  	}
+	public static void writeToFile(){
+		try {
+			FileOutputStream fout=new FileOutputStream("./test.txt");
+			String s="i love it when money makes a difference, but don't make you different";
+			byte[] b=s.getBytes();
+			fout.write(b);
+			System.out.println("Done");
+			fout.close();
+		}catch(Exception e){
+			
+		}
+	}
+	public static void readFromFile(){
+		try {
+			FileInputStream fout=new FileInputStream("./test.txt");
+			int i=0;
+			while((i=fout.read())!=-1) {
+				System.out.print((char)i);
+				}
+			fout.close();
+		}catch(Exception e){
+			
+		}
+	}
+	public static void Lambda(){
+		ArrayList<Integer> arr=new ArrayList<Integer>();
+		arr.add(1);
+		arr.add(2);
+		arr.add(3);
+		arr.add(4);
+		//lambda a=()->{
+			
+		//	System.out.print("Hello");
+		//};
+		//a.sayHello();
+		arr.forEach((n)->{
+			System.out.print(n);
+		});
+	}
 	public static void main(String[] args) {
 		System.out.println("choose option: \n1.inheritance\n2.abstraction\n/3.Encapsulation\n4.Overloading\n5.Overiding"
 				+"\n6.ArrayList\n7.LinkedList\n8.Vector\n9.stack\n10.priority queue\n11.ArrayDeque"+
-				"\n12.HashSet\n13.LinkedHashSet");
+				"\n12.HashSet\n13.LinkedHashSet\n14.write to file\n15.read from file\n16.lambda expressions");
 		Scanner s=new Scanner(System.in);
 		while(true){
 		int a=Integer.parseInt(s.nextLine());
@@ -237,6 +280,15 @@ class Base extends Parent{
 			break;
 		case 13:
 			Base.Linkedset();
+			break;
+		case 14:
+			Base.writeToFile();
+			break;
+		case 15:
+			Base.readFromFile();
+			break;
+		case 16:
+			Base.Lambda();
 			break;
 		default:
 			System.out.println("Invalid option");
